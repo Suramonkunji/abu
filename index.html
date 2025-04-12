@@ -71,6 +71,24 @@
   </div>
 
   <script>
+    function handleAnswer(answer) {
+  // Track the selection
+  console.log("User selected:", answer); 
+  
+  // (Optional) Save to localStorage
+  localStorage.setItem('lastSelection', answer);
+  
+  // Your existing logic
+  if (questionEl.innerText.includes("Are you Jannat")) {
+    // ... rest of your existing code ...
+  }
+}
+
+// Check stored selections on page load (optional)
+window.onload = function() {
+  const lastAnswer = localStorage.getItem('lastSelection');
+  if (lastAnswer) console.log("Last selection was:", lastAnswer);
+};
     const questionEl = document.getElementById("question-box");
 
     function handleAnswer(answer) {
