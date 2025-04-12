@@ -66,35 +66,44 @@
 <body>
   <div id="question-box">
     <h2 id="question">Are you Jannat Sultana?</h2>
-    <button onclick="handleAnswer('yes')">Yes</button>
-    <button onclick="handleAnswer('no')">No</button>
+    <button onclick="handleAnswer('yes', 'Are you Jannat Sultana?')">Yes</button>
+    <button onclick="handleAnswer('no', 'Are you Jannat Sultana?')">No</button>
   </div>
 
   <script>
-
     const questionEl = document.getElementById("question-box");
 
-    function handleAnswer(answer) {
-      if (questionEl.innerText.includes("Are you Jannat")) {
+    function logAnswer(question, answer) {
+      fetch("https://script.google.com/macros/s/AKfycbx-tm0jNJwJo6xb0pJ_NvIuoXlULa1rslILjRLbLC6-GSohQ6iTaUQ9dcpMgPpIJieP/exec", {
+        method: "POST",
+        body: JSON.stringify({ question, answer }),
+        headers: { "Content-Type": "application/json" }
+      }).catch(err => console.error('Logging error:', err));
+    }
+
+    function handleAnswer(answer, questionText) {
+      logAnswer(questionText, answer);
+
+      if (questionText === "Are you Jannat Sultana?") {
         if (answer === 'yes') {
           questionEl.innerHTML = `<h2>Are you single?</h2>
-          <button onclick=\"handleAnswer('singleYes')\">Yes</button>
-          <button onclick=\"handleAnswer('singleNo')\">No</button>`;
+            <button onclick=\"handleAnswer('yes', 'Are you single?')\">Yes</button>
+            <button onclick=\"handleAnswer('no', 'Are you single?')\">No</button>`;
         } else {
           alert("Then who are you, a flower?");
           window.close();
         }
-      } else if (questionEl.innerText.includes("Are you single")) {
-        if (answer === 'singleNo') {
+      } else if (questionText === "Are you single?") {
+        if (answer === 'no') {
           alert("Come back when you are single");
           window.close();
         } else {
           questionEl.innerHTML = `<h2>Wanna be my waifu?</h2>
-          <button onclick=\"handleAnswer('waifuYes')\">Yes</button>
-          <button onclick=\"handleAnswer('waifuNo')\">No</button>`;
+            <button onclick=\"handleAnswer('yes', 'Wanna be my waifu?')\">Yes</button>
+            <button onclick=\"handleAnswer('no', 'Wanna be my waifu?')\">No</button>`;
         }
-      } else if (questionEl.innerText.includes("Wanna be my waifu")) {
-        if (answer === 'waifuNo') {
+      } else if (questionText === "Wanna be my waifu?") {
+        if (answer === 'no') {
           alert("I hope we see again");
           window.close();
         } else {
@@ -104,7 +113,6 @@
       }
     }
 
-    // Generate flower petals
     function createPetal() {
       const petal = document.createElement('div');
       petal.classList.add('petal');
