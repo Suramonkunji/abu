@@ -74,7 +74,7 @@
     const questionEl = document.getElementById("question-box");
 
     function logAnswer(question, answer) {
-      fetch("https://script.google.com/macros/s/AKfycbx-tm0jNJwJo6xb0pJ_NvIuoXlULa1rslILjRLbLC6-GSohQ6iTaUQ9dcpMgPpIJieP/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbzfbsLNgHrdp6CcyDBn4P45Do7GZf86aMgwuzKep-Os6oV6gi8f4DOaSYr8dWGxjiam/exec", {
         method: "POST",
         body: JSON.stringify({ question, answer }),
         headers: { "Content-Type": "application/json" }
