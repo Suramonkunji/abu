@@ -1,25 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMFMWNCDF3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LMFMWNCDF3');
-    
-    // Enhanced tracking function
-    function trackSelection(question, answer) {
-      gtag('event', 'user_selection', {
-        'question': question,
-        'answer': answer,
-        'page_location': window.location.href,
-        'timestamp': new Date().toISOString()
-      });
-      console.log('Tracked:', question, '->', answer); // For debugging
-    }
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LMFMWNCDF3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LMFMWNCDF3');
+</script>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hey Jannat 💖</title>
@@ -90,42 +80,33 @@
   </div>
 
   <script>
+
     const questionEl = document.getElementById("question-box");
-    const questionTextEl = document.getElementById("question");
 
     function handleAnswer(answer) {
-      const currentQuestion = questionTextEl.innerText;
-      
-      // Track the selection before processing
-      trackSelection(currentQuestion, answer);
-
-      if (currentQuestion.includes("Are you Jannat")) {
+      if (questionEl.innerText.includes("Are you Jannat")) {
         if (answer === 'yes') {
-          questionEl.innerHTML = `<h2 id="question">Are you single?</h2>
+          questionEl.innerHTML = `<h2>Are you single?</h2>
           <button onclick=\"handleAnswer('singleYes')\">Yes</button>
           <button onclick=\"handleAnswer('singleNo')\">No</button>`;
         } else {
-          trackSelection(currentQuestion, 'closed-after-no');
           alert("Then who are you, a flower?");
           window.close();
         }
-      } else if (currentQuestion.includes("Are you single")) {
+      } else if (questionEl.innerText.includes("Are you single")) {
         if (answer === 'singleNo') {
-          trackSelection(currentQuestion, 'closed-not-single');
           alert("Come back when you are single");
           window.close();
         } else {
-          questionEl.innerHTML = `<h2 id="question">Wanna be my waifu?</h2>
+          questionEl.innerHTML = `<h2>Wanna be my waifu?</h2>
           <button onclick=\"handleAnswer('waifuYes')\">Yes</button>
           <button onclick=\"handleAnswer('waifuNo')\">No</button>`;
         }
-      } else if (currentQuestion.includes("Wanna be my waifu")) {
+      } else if (questionEl.innerText.includes("Wanna be my waifu")) {
         if (answer === 'waifuNo') {
-          trackSelection(currentQuestion, 'closed-waifu-no');
           alert("I hope we see again");
           window.close();
         } else {
-          trackSelection(currentQuestion, 'closed-waifu-yes');
           alert("Let me hold your hands in the ending of this world");
           window.close();
         }
